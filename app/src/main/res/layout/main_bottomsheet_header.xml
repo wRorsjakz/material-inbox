@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainfragment_bottomsheet_header"
+    android:layout_width="match_parent"
+    android:layout_height="85dp"
+    android:background="@android:color/white"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/mainfragment_bottomsheet_profilepic"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/profile_pic_11" />
+
+    <TextView
+        android:id="@+id/mainfragment_bottomsheet_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        android:layout_toEndOf="@id/mainfragment_bottomsheet_profilepic"
+        android:singleLine="true"
+        android:text="Rachel Been"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mainfragment_bottomsheet_emailaddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mainfragment_bottomsheet_name"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@id/mainfragment_bottomsheet_profilepic"
+        android:singleLine="true"
+        android:text="email_address@gmail.com"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp" />
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:background="@color/colorLightGrey" />
+
+</RelativeLayout>

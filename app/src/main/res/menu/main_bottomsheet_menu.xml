@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:enabled="false"
+        android:title=" " />
+    <item android:enabled="false"
+        android:title=" " />
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_primary"
+            android:icon="@drawable/ic_inbox_black_24dp"
+            android:title="Primary" />
+
+        <item
+            android:id="@+id/menu_social"
+            android:icon="@drawable/ic_group_black_24dp"
+            android:title="Social" />
+
+        <item
+            android:id="@+id/menu_promotions"
+            android:icon="@drawable/ic_local_offer_black_24dp"
+            android:title="Promotions" />
+    </group>
+
+    <item android:title="All Lables">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/menu_starred"
+                    android:icon="@drawable/ic_star_black_24dp"
+                    android:title="Starred" />
+                <item
+                    android:id="@+id/menu_snoozed"
+                    android:icon="@drawable/ic_timelapse_black_24dp"
+                    android:title="Snoozed" />
+                <item
+                    android:id="@+id/menu_important"
+                    android:icon="@drawable/ic_bookmark_black_24dp"
+                    android:title="Important" />
+                <item
+                    android:id="@+id/menu_sent"
+
+                    android:icon="@drawable/ic_send_black_24dp"
+                    android:title="Sent" />
+                <item
+                    android:id="@+id/menu_drafts"
+
+                    android:icon="@drawable/ic_insert_drive_file_black_24dp"
+                    android:title="Drafts" />
+                <item
+                    android:id="@+id/menu_all_mail"
+
+                    android:icon="@drawable/ic_email_black_24dp"
+                    android:title="All Mail" />
+                <item
+                    android:id="@+id/menu_spam"
+
+                    android:icon="@drawable/ic_warning_black_24dp"
+                    android:title="Spam" />
+                <item
+                    android:id="@+id/menu_bin"
+                    android:icon="@drawable/ic_delete_black_24dp"
+                    android:title="Bin" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Google apps">
+        <menu>
+            <item
+                android:id="@+id/menu_calendar"
+                android:icon="@drawable/ic_date_range_black_24dp"
+                android:title="Calendar" />
+            <item
+                android:id="@+id/menu_contacts"
+                android:icon="@drawable/ic_import_contacts_black_24dp"
+                android:title="Contacts" />
+        </menu>
+    </item>
+
+    <item android:title="Others">
+    <menu>
+        <item
+            android:id="@+id/menu_settings"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="Settings" />
+        <item
+            android:id="@+id/menu_helpfeedback"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:title="Help &amp; feedback" />
+    </menu>
+    </item>
+
+
+</menu>
