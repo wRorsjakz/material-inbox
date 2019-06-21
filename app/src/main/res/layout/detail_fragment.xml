@@ -1,41 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.bottomappbar.Fragments.PullDismissLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/detailfragment_pulldismisslayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/detailfragment_coordinatelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true">
+        android:clickable="true"
+        android:focusable="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/detailfragment_appbarlayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_gravity="top"
-            android:stateListAnimator="@animator/toolbar_elevation_animator">
+            android:background="?android:attr/windowBackground">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/detailfragment_toolbar"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/detailfragment_collapsingtoolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="?android:attr/windowBackground" />
+                android:layout_height="match_parent"
+                android:background="?android:attr/windowBackground"
+                app:collapsedTitleTextAppearance="@style/CollapsedToolbar"
+                app:expandedTitleGravity="bottom"
+                app:expandedTitleMarginBottom="18dp"
+                app:expandedTitleMarginStart="20dp"
+
+                app:expandedTitleMarginTop="0dp"
+                app:expandedTitleTextAppearance="@style/ExpandedCollapsingToolbar"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/detailfragment_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:background="?android:attr/windowBackground"
+                    android:stateListAnimator="@animator/toolbar_elevation_animator"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                    app:title="Summer BBQ" />
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <FrameLayout
-            android:id="@+id/detailfragment_framelayout"
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/detailfragment_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/detailfragment_appbarlayout"
-            android:background="?android:attr/windowBackground">
+            android:background="?android:attr/windowBackground"
+            android:paddingBottom="100dp"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        </FrameLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
+                <include layout="@layout/detailfragment_content_header" />
+
+                <TextView
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:paddingBottom="60dp"
+                    android:textSize="14sp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/content_placeholder"/>
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 </com.example.bottomappbar.Fragments.PullDismissLayout>

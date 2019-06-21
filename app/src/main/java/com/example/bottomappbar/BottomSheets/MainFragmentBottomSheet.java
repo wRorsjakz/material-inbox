@@ -3,6 +3,8 @@ package com.example.bottomappbar.BottomSheets;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.transition.Transition;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +18,13 @@ import com.example.bottomappbar.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.Objects;
+
 public class MainFragmentBottomSheet extends BottomSheetDialogFragment {
 
     private NavigationView navigationView;
+
+    private static final String TAG = "MainFragmentBottomSheet";
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,6 +60,9 @@ public class MainFragmentBottomSheet extends BottomSheetDialogFragment {
             BottomNavColor.setWhiteNavigationBar(dialog, getActivity());
         }
 
+        // Sets the sliding animation as defined in the styles.xml
+        Objects.requireNonNull(dialog.getWindow()).getAttributes().windowAnimations = R.style.DialogAnimation;
+
         return dialog;
     }
 
@@ -76,4 +85,6 @@ public class MainFragmentBottomSheet extends BottomSheetDialogFragment {
             }
         });
     }
+
+
 }

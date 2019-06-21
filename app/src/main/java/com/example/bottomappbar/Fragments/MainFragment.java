@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -97,6 +98,8 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         mainFragmentBottomSheet = new MainFragmentBottomSheet();
         // BottomSheet/Navigation Drawer menu item click listener
         mainFragmentBottomSheet.setNavDrawerItemClickedListener(this);
+        mainFragmentBottomSheet.setExitTransition(AnimationUtils.loadAnimation(getContext(),
+                R.anim.slide_down));
         // Hamburger navigation icon pressed - it opens the bottom sheet which acts as the navigation drawer
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +192,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         bottomAppBar.getMenu().clear();
         fab.hide();
         bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_END);
+        fab.setImageDrawable(ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.heart_white_24dp));
         fab.show();
         bottomAppBar.setNavigationIcon(null);
 
@@ -201,7 +205,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         }, 250);
 
         Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment_container, new DetailFragment(email, position)).addToBackStack(null)
+                .add(R.id.main_fragment_container, new DetailFragment(email, position), "detail_fragment").addToBackStack(null)
                 .commit();
     }
 
@@ -231,7 +235,16 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
     public void navDrawerItemClicked(MenuItem menuItem) {
         Toast.makeText(getContext(), menuItem.getTitle() + " Clicked", Toast.LENGTH_SHORT).show();
         if (mainFragmentBottomSheet.isVisible()) {
-            mainFragmentBottomSheet.dismiss();
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    mainFragmentBottomSheet.dismiss();
+
+                }
+            },300);
+
         }
     }
 

@@ -22,6 +22,8 @@ public class PullDismissLayout extends FrameLayout {
     private float verticalTouchSlop;
     private boolean animateAlpha;
 
+    private boolean scrollEnabled = true;
+
     public PullDismissLayout(@NonNull Context context) {
         super(context);
         init(context);
@@ -83,7 +85,8 @@ public class PullDismissLayout extends FrameLayout {
                     dragHelper.checkTouchSlop(ViewDragHelper.DIRECTION_VERTICAL)) {
 
                 View child = getChildAt(0);
-                if (child != null && !listener.onShouldInterceptTouchEvent()) {
+
+                if (child != null && scrollEnabled) {
                     dragHelper.captureChildView(child, event.getPointerId(0));
                     return dragHelper.getViewDragState() == ViewDragHelper.STATE_DRAGGING;
                 }
@@ -139,7 +142,7 @@ public class PullDismissLayout extends FrameLayout {
 
         @SuppressLint({"NewApi"})
         public void onViewPositionChanged(View view, int left, int top, int dx, int dy) {
-            float setAlphaFactor = 8; // The greater the factor, the less pronounced the fading effect
+            float setAlphaFactor = 4; // The greater the factor, the less pronounced the fading effect
             int range = pullDismissLayout.getHeight();
             int moved = Math.abs(top - startTop);
             if (range > 0) {
@@ -169,6 +172,18 @@ public class PullDismissLayout extends FrameLayout {
         }
     }
 
+    /**
+     * A handy method which enables or disables the pull-to-dismiss functionality of the layout
+     * Default value is true (enabled)
+     * Set false to disable
+     * @param scrollEnabled
+     */
+    public void setScrollEnabled(boolean scrollEnabled) {
+        if(listener != null){
+            this.scrollEnabled = scrollEnabled;
+        }
+    }
+
     public interface Listener {
         /**
          * Layout is pulled down to dismiss
@@ -176,14 +191,5 @@ public class PullDismissLayout extends FrameLayout {
          */
         void onDismissed();
 
-        /**
-         * Convenient method to avoid layout overriding event
-         * If you have a RecyclerView or ScrollerView in our layout your can
-         * avoid PullDismissLayout to handle event.
-         *
-         * @return true when ignore pull down event, f
-         * false for allow PullDismissLayout handle event
-         */
-        boolean onShouldInterceptTouchEvent();
     }
 }

@@ -1,11 +1,15 @@
 package com.example.bottomappbar;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.bottomappbar.Fragments.MainFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
@@ -30,7 +34,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             initialiseMainFragment();
+
         }
+
+        handleFABClick();
     }
 
     private void initialiseViews() {
@@ -49,17 +56,41 @@ public class MainActivity extends AppCompatActivity {
         fab.setImageResource(R.drawable.ic_add_white_24dp);
     }
 
+    /**
+     * Since FAB is part of the activity's views, and is thus shared between different fragments.
+     * Check which icon is shown in the FAB (which fragment)
+     */
+    private void handleFABClick() {
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // FAB icon is add (mainFragment)
+                if(fab.getDrawable().getConstantState() ==
+                        ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_add_white_24dp).getConstantState()){
+                // FAB icon is favourite (detailFragment)
+                } else if(fab.getDrawable().getConstantState() ==
+                ContextCompat.getDrawable(MainActivity.this, R.drawable.heart_white_24dp).getConstantState()){
+
+                }
+            }
+        });
+
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
         // Determines if after back button pressed, the fragment being shown is the mainFragment.
         // If yes, then carry out the appropriate bottomappbar animations
-        MainFragment mainFragment = (MainFragment)getSupportFragmentManager().findFragmentByTag("main_fragment");
-        if(mainFragment != null && mainFragment.isVisible()){
+        MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentByTag("main_fragment");
+        if (mainFragment != null && mainFragment.isVisible()) {
             bottomAppBar.getMenu().clear();
             fab.hide();
             bottomAppBar.setFabAlignmentMode(BottomAppBar.FAB_ALIGNMENT_MODE_CENTER);
+            fab.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_add_white_24dp));
             fab.show();
 
             Handler handler = new Handler();
