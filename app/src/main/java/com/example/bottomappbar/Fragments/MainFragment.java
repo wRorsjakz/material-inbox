@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -99,7 +100,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         // BottomSheet/Navigation Drawer menu item click listener
         mainFragmentBottomSheet.setNavDrawerItemClickedListener(this);
         mainFragmentBottomSheet.setExitTransition(AnimationUtils.loadAnimation(getContext(),
-                R.anim.slide_down));
+                R.anim.bottom_dialog_slide_down));
         // Hamburger navigation icon pressed - it opens the bottom sheet which acts as the navigation drawer
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,8 +205,10 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
             }
         }, 250);
 
-        Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
-                .add(R.id.main_fragment_container, new DetailFragment(email, position), "detail_fragment").addToBackStack(null)
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.fragment_slide_up, R.anim.fragment_slide_down,
+                R.anim.bottom_dialog_slide_up, R.anim.bottom_dialog_slide_down);
+        fragmentTransaction.add(R.id.main_fragment_container, new DetailFragment(email, position), "detail_fragment").addToBackStack(null)
                 .commit();
     }
 
