@@ -1,12 +1,9 @@
 package com.example.bottomappbar;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -67,11 +64,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 // FAB icon is add (mainFragment)
-                if(fab.getDrawable().getConstantState() ==
-                        ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_add_white_24dp).getConstantState()){
-                // FAB icon is favourite (detailFragment)
-                } else if(fab.getDrawable().getConstantState() ==
-                ContextCompat.getDrawable(MainActivity.this, R.drawable.heart_white_24dp).getConstantState()){
+                if (fab.getDrawable().getConstantState() ==
+                        ContextCompat.getDrawable(MainActivity.this, R.drawable.ic_add_white_24dp).getConstantState()) {
+                    // FAB icon is favourite (detailFragment)
+                } else if (fab.getDrawable().getConstantState() ==
+                        ContextCompat.getDrawable(MainActivity.this, R.drawable.heart_white_24dp).getConstantState()) {
 
                 }
             }

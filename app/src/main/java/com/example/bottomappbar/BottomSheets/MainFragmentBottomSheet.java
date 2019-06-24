@@ -3,8 +3,6 @@ package com.example.bottomappbar.BottomSheets;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.transition.Transition;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -69,8 +67,12 @@ public class MainFragmentBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        navigationView = view.findViewById(R.id.navigation_view);
+        navigationView = view.findViewById(R.id.bottomsheet_navigation_view);
 
+        // Set default checked navigation drawer item
+        if (savedInstanceState == null) {
+            navigationView.getMenu().getItem(2).setChecked(true);
+        }
         /*
            - Handle NavigationView/BottomSheet menu item click
          */

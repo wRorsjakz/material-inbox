@@ -2,6 +2,7 @@ package com.example.bottomappbar.Fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -70,6 +71,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onViewCreated: Run");
         super.onViewCreated(view, savedInstanceState);
 
         initialiseViews(view);
@@ -89,11 +91,15 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         // Activity Views
         bottomAppBar = Objects.requireNonNull(getActivity()).findViewById(R.id.main_bottomappbar);
         fab = Objects.requireNonNull(getActivity()).findViewById(R.id.main_fab);
+
+        swipeRefreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorAccent),
+                ContextCompat.getColor(Objects.requireNonNull(getContext()), R.color.colorPrimary));
+
     }
 
     /**
      * Handle bottomAppBar item click
-     * - It consists of
      */
     private void bottomAppBarItemClicked() {
         mainFragmentBottomSheet = new MainFragmentBottomSheet();
@@ -101,6 +107,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         mainFragmentBottomSheet.setNavDrawerItemClickedListener(this);
         mainFragmentBottomSheet.setExitTransition(AnimationUtils.loadAnimation(getContext(),
                 R.anim.bottom_dialog_slide_down));
+
         // Hamburger navigation icon pressed - it opens the bottom sheet which acts as the navigation drawer
         bottomAppBar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +122,6 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
         bottomAppBar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-
                 switch (item.getItemId()) {
                     case R.id.search_icon:
                         Toast.makeText(getContext(), "Search pressed", Toast.LENGTH_SHORT).show();
@@ -148,7 +154,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
             Set up recyclerview divider using custom "MyRVItemDecoration" which extends RecyclerView.ItemDecoration
          */
         MyRVItemDecoration dividerItemDecoration = new MyRVItemDecoration(
-                ContextCompat.getDrawable(getContext(), R.drawable.recyclerview_divider));
+                ContextCompat.getDrawable(Objects.requireNonNull(getContext()), R.drawable.recyclerview_divider));
         recyclerView.addItemDecoration(dividerItemDecoration);
         ////////////////////////////////////////////////////////////////////////////////////////////
         adapter = new MainFragmentRVAdapter(getContext(), ProfilePicHelper.getProfilePics(), "Today");
@@ -246,7 +252,7 @@ public class MainFragment extends Fragment implements MainFragmentRVAdapter.main
                     mainFragmentBottomSheet.dismiss();
 
                 }
-            },300);
+            }, 300);
 
         }
     }
